@@ -100,9 +100,10 @@ async function main() {
     tags,
     async () => {
       await github.checkoutNewBranch(formatTitle);
-      await github.commitChanges();
-      await github.pushChanges(formatTitle);
-      await github.submitPr(formatTitle);
+      github.commitChanges().then(async () => {
+        await github.pushChanges(formatTitle);
+        await github.submitPr(formatTitle);
+      });
     }
   );
 }
