@@ -5,19 +5,6 @@ const inquirer = require("./lib/inquirer");
 const github = require("./lib/github");
 const fs = require("fs");
 
-async function getGithubToken() {
-  // Fetch token from config store
-  let token = github.getStoredGithubToken();
-  if (token) {
-    return token;
-  }
-
-  // No token found, use credentials to access GitHub account
-  token = await github.getPersonalAccessToken();
-
-  return token;
-}
-
 async function handleBlogPostUserInput() {
   const {
     title,
@@ -62,42 +49,25 @@ async function main() {
     );
   }
 
-  let token;
   try {
-    token = await getGithubToken();
-    github.githubAuth(token);
-  } catch (err) {
-    if (err) {
-      switch (err.status) {
-        case 401:
-          log.error(
-            "Couldn't log you in. Please provide correct credentials/token."
-          );
-          break;
-        case 422:
-          log.error(
-            "There is already a remote repository or token with the same name"
-          );
-          break;
-        default:
-          log.error(err);
-      }
-    }
-  }
+    await github.authenticateUser();
 
-  const {
-    title,
-    formatTitle,
-    description,
-    date,
-    tags
-  } = await handleBlogPostUserInput();
-  files.createPostTemplate(title, formatTitle, description, date, tags);
-  await github.checkoutNewBranch(formatTitle);
-  await github.add(__dirname + `\\${formatTitle}\\${formatTitle}.md`);
-  await github.commit();
-  await github.push(formatTitle);
-  await github.submitPr(formatTitle);
+    const {
+      title,
+      formatTitle,
+      description,
+      date,
+      tags
+    } = await handleBlogPostUserInput();
+    files.createPostTemplate(title, formatTitle, description, date, tags);
+    await github.checkoutNewBranch(formatTitle);
+    await github.add(__dirname + `\\${formatTitle}\\${formatTitle}.md`);
+    await github.commit();
+    await github.push(formatTitle);
+    await github.submitPr(formatTitle, date.split("T")[0]);
+  } catch (error) {
+    log.error(error.message);
+  }
 }
 
 main();
