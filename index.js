@@ -91,15 +91,20 @@ async function main() {
     date,
     tags
   } = await handleBlogPostUserInput();
-  files.createPostTemplate(title, formatTitle, description, date, tags);
-  await new Promise(resolve => setTimeout(resolve, 3000));
-  log.print("Checking out branch...", { color: "blue" });
-  await github.checkoutNewBranch(formatTitle);
-  log.print("Committing changes...", { color: "blue" });
-  await github.commitChanges();
-  log.print("Pushing branch...", { color: "blue" });
-  await github.pushChanges(formatTitle);
-  await github.submitPr(formatTitle);
+  // await new Promise(resolve => setTimeout(resolve, 5000));
+  files.createPostTemplate(
+    title,
+    formatTitle,
+    description,
+    date,
+    tags,
+    async () => {
+      await github.checkoutNewBranch(formatTitle);
+      await github.commitChanges();
+      await github.pushChanges(formatTitle);
+      await github.submitPr(formatTitle);
+    }
+  );
 }
 
 main();
