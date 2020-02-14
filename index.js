@@ -92,7 +92,7 @@ async function main() {
     tags
   } = await handleBlogPostUserInput();
   files.createPostTemplate(title, formatTitle, description, date, tags);
-  await github.createBranch(formatTitle);
+  // await github.createBranch(formatTitle);
   await github.checkoutBranch(formatTitle);
   await github.commitChanges();
 }
