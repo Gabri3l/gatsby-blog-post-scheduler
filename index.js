@@ -92,7 +92,7 @@ async function main() {
     tags
   } = await handleBlogPostUserInput();
   files.createPostTemplate(title, formatTitle, description, date, tags);
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  await new Promise(resolve => setTimeout(resolve, 5000));
   log.print("Checking out branch...", { color: "blue" });
   await github.checkoutNewBranch(formatTitle);
   log.print("Committing changes...", { color: "blue" });
