@@ -99,6 +99,7 @@ async function main() {
   await github.commitChanges();
   log.print("Pushing branch...", { color: "blue" });
   await github.pushChanges(formatTitle);
+  await github.submitPr(formatTitle);
 }
 
 main();
