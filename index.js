@@ -2,6 +2,20 @@ const log = require("./lib/log");
 const clear = require("clear");
 const files = require("./lib/files");
 const inquirer = require("./lib/inquirer");
+const github = require("./lib/github");
+
+async function getGithubToken() {
+  // Fetch token from config store
+  let token = github.getStoredGithubToken();
+  if (token) {
+    return token;
+  }
+
+  // No token found, use credentials to access GitHub account
+  token = await github.getPersonalAccessToken();
+
+  return token;
+}
 
 async function handleBlogPostUserInput() {
   const {
@@ -47,6 +61,29 @@ async function main() {
     );
   }
 
+  let token;
+  try {
+    token = await getGithubToken();
+    github.githubAuth(token);
+  } catch (err) {
+    if (err) {
+      switch (err.status) {
+        case 401:
+          log.error(
+            "Couldn't log you in. Please provide correct credentials/token."
+          );
+          break;
+        case 422:
+          log.error(
+            "There is already a remote repository or token with the same name"
+          );
+          break;
+        default:
+          log.error(err);
+      }
+    }
+  }
+
   const {
     title,
     formatTitle,
@@ -55,6 +92,8 @@ async function main() {
     tags
   } = await handleBlogPostUserInput();
   files.createPostTemplate(title, formatTitle, description, date, tags);
+  await github.checkoutNewBranch(formatTitle);
+  await github.commitChanges();
 }
 
 main();
