@@ -3,6 +3,7 @@ const clear = require("clear");
 const files = require("./lib/files");
 const inquirer = require("./lib/inquirer");
 const github = require("./lib/github");
+const fs = require("fs");
 
 async function getGithubToken() {
   // Fetch token from config store
@@ -91,13 +92,39 @@ async function main() {
     date,
     tags
   } = await handleBlogPostUserInput();
-  files.createPostTemplate(title, formatTitle, description, date, tags);
-  await new Promise(resolve => setTimeout(resolve, 10000));
-  await github.checkoutNewBranch(formatTitle);
-  await github.add(`${formatTitle}/${formatTitle}.md`);
-  await github.commit();
-  await github.push(formatTitle);
-  await github.submitPr(formatTitle);
+  // files.createPostTemplate(title, formatTitle, description, date, tags);
+  // specify the path to the file, and create a buffer with characters we want to write
+  let path = `${formatTitle}/${formatTitle}.md`;
+
+  // open the file in writing mode, adding a callback function where we do the actual writing
+  fs.open(path, "w", function(err, fd) {
+    if (err) {
+      throw "could not open file: " + err;
+    }
+
+    // write the contents of the buffer, from position 0 to the end, to the file descriptor returned in opening our file
+    fs.write(
+      fd,
+      "Those who wish to follow me\nI welcome with my hands\nAnd the red sun sinks at last",
+      null,
+      "utf8",
+      function(err) {
+        if (err) throw "error writing file: " + err;
+        fs.close(fd, async function() {
+          console.log(
+            "wrote the file successfully to " +
+              __dirname +
+              `\\${formatTitle}\\${formatTitle}.md`
+          );
+          await github.checkoutNewBranch(formatTitle);
+          await github.add(__dirname + `\\${formatTitle}\\${formatTitle}.md`);
+          await github.commit();
+          await github.push(formatTitle);
+          await github.submitPr(formatTitle);
+        });
+      }
+    );
+  });
 }
 
 main();
