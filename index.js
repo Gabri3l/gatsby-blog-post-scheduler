@@ -94,6 +94,7 @@ async function main() {
   files.createPostTemplate(title, formatTitle, description, date, tags);
   await github.checkoutNewBranch(formatTitle);
   await github.commitChanges();
+  await github.pushChanges(formatTitle);
 }
 
 main();
