@@ -3,7 +3,6 @@ const clear = require("clear");
 const files = require("./lib/files");
 const inquirer = require("./lib/inquirer");
 const github = require("./lib/github");
-const fs = require("fs");
 
 async function handleBlogPostUserInput() {
   const {
@@ -38,7 +37,7 @@ async function main() {
 
   log.print("Create Blog Post", { color: "yellow", isTitle: true });
   log.print(
-    `A simple CLI tool to create a blog post based on Gatsby blog starter. 
+    `A simple CLI tool to create a blog post based on Gatsby blog starter.
       Make sure to run this from the root of your project.`,
     { color: "blue" }
   );
@@ -64,7 +63,7 @@ async function main() {
     await github.add(__dirname + `\\${formatTitle}\\${formatTitle}.md`);
     await github.commit();
     await github.push(formatTitle);
-    await github.submitPr(formatTitle, date.split("T")[0]);
+    await github.submitPr(formatTitle, date.split(" ")[0]);
   } catch (error) {
     log.error(error.message);
   }
