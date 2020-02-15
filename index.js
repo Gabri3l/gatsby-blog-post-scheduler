@@ -1,5 +1,6 @@
 const log = require("./lib/log");
 const clear = require("clear");
+const path = require("path");
 const files = require("./lib/files");
 const inquirer = require("./lib/inquirer");
 const github = require("./lib/github");
@@ -16,12 +17,7 @@ async function handleBlogPostUserInput() {
     .split(" ")
     .join("-");
 
-  if (files.directoryExists(formatTitle)) {
-    log.error("This folder already exists! Try a new one or exit with CTRL+C.");
-    handleBlogPostUserInput();
-  } else {
-    files.createDirectory(formatTitle);
-  }
+  files.createDirectory(formatTitle);
 
   return Promise.resolve({
     title,
@@ -60,7 +56,7 @@ async function main() {
     } = await handleBlogPostUserInput();
     files.createPostTemplate(title, formatTitle, description, date, tags);
     await github.checkoutNewBranch(formatTitle);
-    await github.add(__dirname + `\\${formatTitle}\\${formatTitle}.md`);
+    await github.add(path.join(__dirname, formatTitle, `${formatTitle}.md`));
     await github.commit();
     await github.push(formatTitle);
     await github.submitPr(formatTitle, date.split(" ")[0]);
