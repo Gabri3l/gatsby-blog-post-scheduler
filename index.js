@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const log = require("./lib/log");
 const clear = require("clear");
 const path = require("path");

@@ -1,10 +1,14 @@
 {
   "name": "gatsby-blog-post-scheduler",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple CLI to generate and schedule a blog post based on Gatsby blog starter.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "gatsby-blog-post-scheduler": "./index.js",
+    "schedule-blog-post": "./index.js"
   },
   "repository": {
     "type": "git",
@@ -13,7 +17,11 @@
   "files": [
     "lib/**/*"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
+    "cli",
     "gatsby",
     "blog",
     "post",
