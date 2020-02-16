@@ -1,7 +1,7 @@
 {
-  "name": "create-gatsby-blog-post",
+  "name": "@gabri3l/blog-post-scheduler",
   "version": "1.0.0",
-  "description": "A simple CLI to generate and schedule a blog post based with Gatsby.",
+  "description": "A simple CLI to generate and schedule a blog post based on Gatsby blog starter.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/Gabri3l/create-gatsby-blog-post.git"
   },
+  "files": [
+    "lib/**/*"
+  ],
   "keywords": [
     "gatsby",
     "blog",
@@ -31,10 +34,7 @@
     "configstore": "^5.0.0",
     "figlet": "^1.2.4",
     "inquirer": "^7.0.4",
-    "lodash": "^4.17.15",
-    "minimist": "^1.2.0",
     "moment": "^2.24.0",
-    "simple-git": "^1.131.0",
-    "touch": "^3.1.0"
+    "simple-git": "^1.131.0"
   }
 }
