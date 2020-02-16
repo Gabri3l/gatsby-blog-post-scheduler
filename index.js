@@ -33,7 +33,7 @@ async function main() {
 
   log.print("Create Blog Post", { color: "yellow", isTitle: true });
   log.print(
-    `A simple CLI tool to create a blog post based on Gatsby blog starter.
+    `A simple CLI tool to create and schedule a blog post based on Gatsby blog starter.
       Make sure to run this from the root of your project.`,
     { color: "blue" }
   );
