@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const log = require("./lib/log");
+const { Spinner } = require("clui");
 const clear = require("clear");
 const path = require("path");
 const files = require("./lib/files");
@@ -72,10 +73,15 @@ async function main() {
       date,
       tags
     );
+    const status = new Spinner(
+      `Committing your changes to branch ${formatTitle}...`
+    );
+    status.start();
     await github.checkoutNewBranch(formatTitle);
     await github.add(newBlogPostFilePath);
     await github.commit();
     await github.push(formatTitle);
+    status.stop();
     await github.submitPr(formatTitle, date.split(" ")[0]);
   } catch (error) {
     log.error(error.message);
