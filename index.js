@@ -19,7 +19,7 @@ async function handleBlogPostUserInput() {
     .split(" ")
     .join("-");
 
-  files.createDirectory(formatTitle);
+  files.createDirectory(`content/blog/${formatTitle}`);
 
   return Promise.resolve({
     title,
