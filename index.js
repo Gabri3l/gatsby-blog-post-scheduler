@@ -46,6 +46,8 @@ async function main() {
     log.errorAndExit(
       "This is not your root directory or it's not a valid git repo."
     );
+  } else {
+    log.print("Found a .git folder, great!", { color: "blue" });
   }
 
   try {
