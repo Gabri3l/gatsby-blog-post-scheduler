@@ -7,7 +7,7 @@ const files = require("./lib/files");
 const inquirer = require("./lib/inquirer");
 const github = require("./lib/github");
 
-const BLOG_POSTS_PATH = path.join(__dirname, "content", "blog");
+const BLOG_POSTS_PATH = path.join(process.cwd(), "content", "blog");
 
 async function handleBlogPostUserInput() {
   const {
