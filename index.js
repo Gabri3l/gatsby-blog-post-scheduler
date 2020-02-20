@@ -17,16 +17,16 @@ async function handleBlogPostUserInput() {
     date,
     tags
   } = await inquirer.askBlogPostDetails();
-  const formatTitle = title
+  const urlFormatTitle = title
     .toLowerCase()
     .split(" ")
     .join("-");
 
-  files.createDirectory(path.join(BLOG_POSTS_PATH, formatTitle));
+  files.createDirectory(path.join(BLOG_POSTS_PATH, urlFormatTitle));
 
   return Promise.resolve({
     title,
-    formatTitle,
+    urlFormatTitle,
     description,
     date,
     tags
@@ -54,15 +54,15 @@ async function main() {
 
     const {
       title,
-      formatTitle,
+      urlFormatTitle,
       description,
       date,
       tags
     } = await handleBlogPostUserInput();
     const newBlogPostFilePath = path.join(
       BLOG_POSTS_PATH,
-      formatTitle,
-      `${formatTitle}.md`
+      urlFormatTitle,
+      `index.md`
     );
     files.createPostTemplate(
       title,
@@ -72,15 +72,15 @@ async function main() {
       tags
     );
     const status = new Spinner(
-      `Committing your changes to branch ${formatTitle}...`
+      `Committing your changes to branch ${urlFormatTitle}...`
     );
     status.start();
-    await github.checkoutNewBranch(formatTitle);
+    await github.checkoutNewBranch(urlFormatTitle);
     await github.add(newBlogPostFilePath);
     await github.commit();
-    await github.push(formatTitle);
+    await github.push(urlFormatTitle);
     status.stop();
-    await github.submitPr(formatTitle, date.split(" ")[0]);
+    await github.submiatPr(urlFormatTitle, date.split(" ")[0]);
   } catch (error) {
     log.error(error.message);
   }
