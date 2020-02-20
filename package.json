@@ -1,6 +1,6 @@
 {
   "name": "gatsby-blog-post-scheduler",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A simple CLI to generate and schedule a blog post based on Gatsby blog starter.",
   "main": "index.js",
   "scripts": {
