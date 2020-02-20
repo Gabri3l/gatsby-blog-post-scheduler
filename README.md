@@ -64,6 +64,12 @@ After that...go ahead and write your post! :tada:
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
+## Coffee
+
+If you really like this project or you just feel like it you can also buy me a coffee!
+
+<a href="https://www.buymeacoffee.com/LduRa5K" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-green.png" alt="Buy Me A Coffee" width="150" ></a> <a href='https://ko-fi.com/W7W31FXJX' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi1.png?v=2' alt='Buy Me a Coffee at ko-fi.com' /></a>
+
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/Gabri3l/gatsby-blog-post-scheduler/tags).
