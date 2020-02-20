@@ -5,6 +5,10 @@
 [![npm version](https://img.shields.io/npm/v/gatsby-blog-post-scheduler.svg?style=flat-square)](https://www.npmjs.com/package/gatsby-blog-post-scheduler)
 [![npm downloads](https://img.shields.io/npm/dm/gatsby-blog-post-scheduler.svg?style=flat-square)](https://www.npmjs.com/package/gatsby-blog-post-scheduler)
 [![HitCount](http://hits.dwyl.com/Gabri3l/gatsby-blog-post-scheduler.svg)](http://hits.dwyl.com/Gabri3l/gatsby-blog-post-scheduler)
+[![GitHub license](https://img.shields.io/github/license/Gabri3l/gatsby-blog-post-scheduler.svg)](https://github.com/Gabri3l/gatsby-blog-post-scheduler/blob/master/LICENSE)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+![GitHub contributors](https://img.shields.io/github/contributors/Gabri3l/gatsby-blog-post-scheduler.svg)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 A simple CLI to generate and schedule a blog post.
 
