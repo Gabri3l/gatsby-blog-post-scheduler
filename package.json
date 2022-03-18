@@ -43,6 +43,6 @@
     "figlet": "^1.2.4",
     "inquirer": "^7.0.4",
     "moment": "^2.24.0",
-    "simple-git": "^1.131.0"
+    "simple-git": "^3.3.0"
   }
 }
